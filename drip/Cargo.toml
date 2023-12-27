@@ -3,7 +3,10 @@ name = "drip"
 version = "0.1.0"
 authors = ["Nico Dinata <nicodnt@icloud.com>"]
 edition = "2021"
+homepage = "https://github.com/ndinata/dotfiles"
+license = "MIT"
 publish = false
+repository = "https://github.com/ndinata/dotfiles"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
