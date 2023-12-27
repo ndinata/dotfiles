@@ -53,7 +53,11 @@ echo "11. Add \`cargo\` dir to \$PATH."
 echo -e "   ${blue}${bold}fish_add_path \$HOME/.cargo/bin${norm}"
 echo
 
-echo "12. Install and run the cli app to install the bundle."
+echo "12. Copy SFMono fonts"
+echo -e "   ${blue}${bold}cp /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* ~/Library/Fonts/${norm}"
+echo
+
+echo "13. Install and run the cli app to install the bundle."
 echo -e "   ${blue}${bold}cargo install --path drip${norm}"
 echo -e "   ${blue}${bold}drip bundle -d recipe/${norm}"
 echo
