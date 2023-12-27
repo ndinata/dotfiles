@@ -1,0 +1,58 @@
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+cask "font-jetbrains-mono"
+cask "visual-studio-code"
+cask "vlc"
+// cask "openemu"
+// cask "zulu11"
+
+brew "bat" {
+    echo "--theme=\"TwoDark\"" "$HOME/.config/bat/config"
+}
+
+brew "biome"
+
+brew "diff-so-fancy" {
+    cp "diff-so-fancy/fdiff.fish" "$HOME/.config/fish/functions/"
+}
+
+brew "fd"
+
+brew "fnm" {
+    echo "fnm env --use-on-cd | source" "$HOME/.config/fish/conf.d/fnm.fish"
+}
+
+brew "git" {
+    cp "git/.gitconfig" "$HOME/"
+}
+
+brew "gitui"
+
+brew "llvm" {
+    fish "fish_add_path /opt/homebrew/opt/llvm/bin"
+}
+
+brew "neovim" {
+    fish "set -Ux EDITOR nvim"
+    dl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" "$HOME/.local/share/nvim/site/autoload/plug.vim"
+    cp "neovim/init.vim" "$HOME/.config/nvim/"
+}
+
+// brew "postgresql@15"
+
+brew "pyenv" {
+    fish "set -Ux PYENV_ROOT $HOME/.pyenv"
+    echo "pyenv init - | source" "$HOME/.config/fish/config.fish"
+}
+
+brew "rbenv" {
+    echo "status --is-interactive; and rbenv init - fish | source" "$HOME/.config/fish/config.fish"
+}
+
+brew "ripgrep" {
+    cp "ripgrep/ripgreprc" "$HOME/.config/ripgrep/"
+    fish "set -Ux RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/ripgreprc"
+}
+
+brew "xh"

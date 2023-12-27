@@ -1,0 +1,2 @@
+# case insensitive if all lowercase, and case sensitive otherwise
+-S

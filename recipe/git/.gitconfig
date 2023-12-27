@@ -1,0 +1,90 @@
+[user]
+  name = Nico Dinata
+  email = nicodnt@icloud.com
+
+[fetch]
+  prune = true
+
+[alias]
+  # list aliases
+  aliases = config --get-regexp alias
+
+  # show verbose output about tags, branches, and remotes
+  branches = branch -a
+  remotes = remote -v
+  tags = tag -l
+
+  # show diff summary between HEAD and commit before it (stat view)
+  ds = diff HEAD~ --stat
+
+  # show diff summary between HEAD and commit before it
+  dl = diff HEAD~
+
+  # show diff of specific file between current version and that `n` commits back
+  # usage: `git df <file_path> <number_of_commits_back>`
+  df = "!f() { git diff HEAD~$2:$1 $1; }; f"
+
+  # find branches containing commit (`git fb <commit>`)
+  fb = "!f() { git branch -a --contains $1; }; f"
+
+  # interactively fuzzy-find a commit with `fzf`
+  fc = "!f() { git show $(git log --pretty=oneline --abbrev-commit --reverse | fzf --tac +s +m -e | sed \"s/ .*//\"); }; f"
+
+  # find commits by keyword in commit messages (`git fm <pattern>`)
+  fm = "!f() { git log --format=format:'%C(blue)%h%C(reset) %C(cyan)%ad%C(reset) %C(white)%s%C(reset)' --date=human --grep=$1; }; f"
+
+  # fetch origin
+  fo = fetch origin
+
+  # switch to a branch, creating it if necessary (`git go <branch>`)
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+  # pretty log
+  l = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)'
+
+  # pretty log (with timestamp)
+  lg = log --graph --all --format=format:'%C(blue)%h%C(reset)  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)%n''         %C(dim cyan)%aD%C(reset) %C(dim green)%ar%C(reset)'
+
+  # mixed-reset last commit
+  reset-last = reset HEAD~
+
+  # interactive rebase to given commit (`git rc <commit>`)
+  rc = "!f() { git rebase -i $1; }; f"
+
+  # interactive rebase to `n` commits back (`git rn <n>`)
+  rn = "!f() { git rebase -i HEAD~$1; }; f"
+
+  # view status with short format
+  s = status -s
+
+[apply]
+  # Detect and fix whitespace errors when applying a patch
+  whitespace = fix
+
+[push]
+  followTags = true
+
+[core]
+  # Make `git rebase` safer on macOS
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
+[diff]
+  colorMoved = default
+
+[pull]
+  rebase = false
+
+[credential]
+  helper = osxkeychain
+
+[init]
+  defaultBranch = main
+
+[merge]
+  tool = nvimdiff
+  conflictstyle = diff3
+
+[mergetool]
+  keepBackup = false
