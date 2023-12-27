@@ -9,6 +9,8 @@ fn main() -> miette::Result<()> {
 
     match cli.command {
         Command::Bundle { recipe_dir } => {
+            // We get `recipe_dir` either from the user via cli, or from the env
+            // var if not specified by the user.
             let recipe_dir = match recipe_dir {
                 Some(dir) => dir,
                 None => env::var("DRIP_RECIPE_DIR")
@@ -22,7 +24,10 @@ fn main() -> miette::Result<()> {
             let recipe = drip::parse_recipe("recipe.kdl", &recipe)?;
             drip::install(&recipe_dir, recipe).into_diagnostic()?;
         }
+
         Command::Diff { recipe_dir } => {
+            // We get `recipe_dir` either from the user via cli, or from the env
+            // var if not specified by the user.
             let recipe_dir = match recipe_dir {
                 Some(dir) => dir,
                 None => env::var("DRIP_RECIPE_DIR")
@@ -50,14 +55,18 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Install the Recipe bundle.
     #[command(visible_alias = "b")]
     Bundle {
+        /// The source Recipe dir.
         #[arg(short = 'd', long, value_hint = ValueHint::DirPath)]
         recipe_dir: Option<PathBuf>,
     },
 
+    /// Print difference between the source Recipe and local formulas.
     #[command(visible_alias = "d")]
     Diff {
+        /// The source Recipe dir.
         #[arg(short = 'd', long, value_hint = ValueHint::DirPath)]
         recipe_dir: Option<PathBuf>,
     },

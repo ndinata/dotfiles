@@ -10,6 +10,10 @@ pub struct CommandError {
     pub reason: String,
 }
 
+/// Prints the difference between the recipe and locally-installed formulas.
+///
+/// ## Errors
+/// Returns an error if running `brew leaves` fails.
 pub fn print_diff(recipe: Recipe) -> Result<(), CommandError> {
     let recipe_formulas: HashSet<String> = HashSet::from_iter(
         recipe.formulas.into_iter().map(|formula| formula.name),
@@ -44,6 +48,7 @@ pub fn print_diff(recipe: Recipe) -> Result<(), CommandError> {
     Ok(())
 }
 
+/// Gets the set of locally-installed formula names.
 fn local_formulas() -> Result<HashSet<String>, CommandError> {
     let output = Command::new("brew")
         .arg("leaves")

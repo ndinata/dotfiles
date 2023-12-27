@@ -9,30 +9,41 @@ use crate::{Postinstall, Recipe};
 pub enum InstallError {
     #[error("cannot install tap '{name}': {reason}")]
     Tap { name: String, reason: String },
+
     #[error("cannot install formula '{name}': {reason}")]
     Formula { name: String, reason: String },
+
     #[error("cannot install cask '{name}': {reason}")]
     Cask { name: String, reason: String },
+
     #[error("command '{cmd}' failed: {reason}")]
     CommandFailed { cmd: String, reason: String },
+
     #[error("cannot create dir '{dir}': {reason}")]
-    CreateDirFailed { dir: String, reason: String },
+    CreateDir { dir: String, reason: String },
+
     #[error("cannot copy '{src}' to '{dst}': {reason}")]
-    CopyFailed {
+    Copy {
         src: String,
         dst: String,
         reason: String,
     },
+
     #[error("cannot download '{url}' to '{dst}': {reason}")]
-    DownloadFailed {
+    Download {
         url: String,
         dst: String,
         reason: String,
     },
+
     #[error("cannot read from or write to '{path}': {reason}")]
     ReadWrite { path: String, reason: String },
 }
 
+/// Installs the `Recipe` bundle.
+///
+/// ## Errors
+/// Propagates errors encountered during the install process.
 pub fn install(recipe_dir: &Path, recipe: Recipe) -> Result<(), InstallError> {
     let Recipe {
         taps,
@@ -59,6 +70,7 @@ pub fn install(recipe_dir: &Path, recipe: Recipe) -> Result<(), InstallError> {
     Ok(())
 }
 
+/// Runs `brew tap`.
 fn install_tap(tap: String) -> Result<(), InstallError> {
     let output =
         Command::new("brew")
@@ -80,6 +92,7 @@ fn install_tap(tap: String) -> Result<(), InstallError> {
     Ok(())
 }
 
+/// Runs `brew install`.
 fn install_formula(formula: String) -> Result<(), InstallError> {
     let output = Command::new("brew")
         .arg("install")
@@ -100,15 +113,18 @@ fn install_formula(formula: String) -> Result<(), InstallError> {
     Ok(())
 }
 
+/// Carries out the specified postinstall step.
 fn run_postinstall_step(
     step: Postinstall,
     postinstall_dir: &Path,
 ) -> Result<(), InstallError> {
     match step {
+        // Copies `src` to `dst`, creating `dst` (and parent dirs) if it doesn't
+        // exist yet. `src` is assumed to be inside `postinstall_dir`.
         Postinstall::Cp(src, dst) => {
             if !dst.is_dir() {
                 fs::create_dir_all(&dst).map_err(|err| {
-                    InstallError::CreateDirFailed {
+                    InstallError::CreateDir {
                         dir: dst.display().to_string(),
                         reason: err.to_string(),
                     }
@@ -116,12 +132,14 @@ fn run_postinstall_step(
             }
 
             let src = postinstall_dir.join(src);
-            fs::copy(&src, &dst).map_err(|err| InstallError::CopyFailed {
+            fs::copy(&src, &dst).map_err(|err| InstallError::Copy {
                 src: src.display().to_string(),
                 dst: dst.display().to_string(),
                 reason: err.to_string(),
             })?;
         }
+
+        // Downloads some file from `url` and places it at `to`.
         Postinstall::Dl(url, to) => {
             let output = Command::new("curl")
                 .arg("-fsSLo")
@@ -135,13 +153,15 @@ fn run_postinstall_step(
                 })?;
 
             if !output.status.success() {
-                return Err(InstallError::DownloadFailed {
+                return Err(InstallError::Download {
                     url,
                     dst: to.display().to_string(),
                     reason: String::from_utf8(output.stderr).unwrap(),
                 });
             }
         }
+
+        // Echoes some string to file at `to`.
         Postinstall::Echo(string, to) => {
             let mut file =
                 OpenOptions::new().append(true).open(&to).map_err(|err| {
@@ -157,6 +177,8 @@ fn run_postinstall_step(
                 }
             })?;
         }
+
+        // Runs some arbitrary command with `fish`.
         Postinstall::Fish(cmd) => {
             let output =
                 Command::new("fish").arg("-c").arg(&cmd).output().map_err(
@@ -178,6 +200,7 @@ fn run_postinstall_step(
     Ok(())
 }
 
+/// Runs `brew install --cask`.
 fn install_cask(cask: String) -> Result<(), InstallError> {
     let output = Command::new("brew")
         .arg("install")
