@@ -163,12 +163,27 @@ fn run_postinstall_step(
 
         // Echoes some string to file at `to`.
         Postinstall::Echo(string, to) => {
-            let mut file =
-                OpenOptions::new().append(true).open(&to).map_err(|err| {
-                    InstallError::ReadWrite {
-                        path: to.display().to_string(),
+            let to_dir = to.parent().ok_or(InstallError::CreateDir {
+                dir: to.display().to_string(),
+                reason: "path has no valid parent dir".to_string(),
+            })?;
+
+            if !to_dir.is_dir() {
+                fs::create_dir_all(to_dir).map_err(|err| {
+                    InstallError::CreateDir {
+                        dir: to_dir.display().to_string(),
                         reason: err.to_string(),
                     }
+                })?;
+            }
+
+            let mut file = OpenOptions::new()
+                .append(true)
+                .create(true)
+                .open(&to)
+                .map_err(|err| InstallError::ReadWrite {
+                    path: to.display().to_string(),
+                    reason: err.to_string(),
                 })?;
             writeln!(file, "{}", string).map_err(|err| {
                 InstallError::ReadWrite {
