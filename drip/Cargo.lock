@@ -196,6 +196,7 @@ dependencies = [
  "clap",
  "knuffel",
  "miette",
+ "simple-home-dir",
  "thiserror",
 ]
 
@@ -422,6 +423,15 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
+ "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "simple-home-dir"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2248bffb36839d917a8d3e046b7cc043ee6ef61970de8f6e7104098113297619"
+dependencies = [
  "windows-sys 0.52.0",
 ]
 

@@ -14,4 +14,5 @@ repository = "https://github.com/ndinata/dotfiles"
 clap = { version = "4.4.11", features = ["derive"] }
 knuffel = "3.2.0"
 miette = { version = "5.10.0", features = ["fancy"] }
+simple-home-dir = { version = "0.2.1", features = ["expand_tilde"] }
 thiserror = "1.0.52"

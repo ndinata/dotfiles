@@ -7,23 +7,23 @@ cask "vlc"
 // cask "zulu11"
 
 brew "bat" {
-    echo "--theme=\"TwoDark\"" "$HOME/.config/bat/config"
+    echo "--theme=\"TwoDark\"" "~/.config/bat/config"
 }
 
 brew "biome"
 
 brew "diff-so-fancy" {
-    cp "diff-so-fancy/fdiff.fish" "$HOME/.config/fish/functions/"
+    cp "diff-so-fancy/fdiff.fish" "~/.config/fish/functions/"
 }
 
 brew "fd"
 
 brew "fnm" {
-    echo "fnm env --use-on-cd | source" "$HOME/.config/fish/conf.d/fnm.fish"
+    echo "fnm env --use-on-cd | source" "~/.config/fish/conf.d/fnm.fish"
 }
 
 brew "git" {
-    cp "git/.gitconfig" "$HOME/"
+    cp "git/.gitconfig" "~/"
 }
 
 brew "gitui"
@@ -34,24 +34,24 @@ brew "llvm" {
 
 brew "neovim" {
     fish "set -Ux EDITOR nvim"
-    dl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" "$HOME/.local/share/nvim/site/autoload/plug.vim"
-    cp "neovim/init.vim" "$HOME/.config/nvim/"
+    dl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" "~/.local/share/nvim/site/autoload/plug.vim"
+    cp "neovim/init.vim" "~/.config/nvim/"
 }
 
 // brew "postgresql@15"
 
 brew "pyenv" {
-    fish "set -Ux PYENV_ROOT $HOME/.pyenv"
-    echo "pyenv init - | source" "$HOME/.config/fish/config.fish"
+    fish "set -Ux PYENV_ROOT ~/.pyenv"
+    echo "pyenv init - | source" "~/.config/fish/config.fish"
 }
 
 brew "rbenv" {
-    echo "status --is-interactive; and rbenv init - fish | source" "$HOME/.config/fish/config.fish"
+    echo "status --is-interactive; and rbenv init - fish | source" "~/.config/fish/config.fish"
 }
 
 brew "ripgrep" {
-    cp "ripgrep/ripgreprc" "$HOME/.config/ripgrep/"
-    fish "set -Ux RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/ripgreprc"
+    cp "ripgrep/ripgreprc" "~/.config/ripgrep/"
+    fish "set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc"
 }
 
 brew "xh"
