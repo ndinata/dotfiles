@@ -17,7 +17,7 @@ echo -e "   ${blue}${bold}/bin/bash -c \"\$(curl -fsSL https://raw.githubusercon
 echo
 
 echo "3. Update Homebrew."
-echo -e "   ${blue}${bold}brew analytics off && brew update && brew upgrade${norm}"
+echo -e "   ${blue}${bold}brew analytics off && brew update${norm}"
 echo
 
 echo "4. Install \`fish\`."
@@ -41,7 +41,7 @@ echo -e "   ${blue}${bold}curl -sL https://raw.githubusercontent.com/jorgebucara
 echo -e "   ${blue}${bold}fisher install pure-fish/pure${norm}"
 echo
 
-echo "9. Add Homebrew dir to \$PATH."
+echo "9. Add Homebrew dir to \$PATH (if not in \`/usr/local/bin\`)."
 echo -e "   ${blue}${bold}fish_add_path /opt/homebrew/bin${norm}"
 echo
 
