@@ -33,7 +33,9 @@ brew "neovim" {
     cp "neovim/init.vim" "~/.config/nvim/"
 }
 
-// brew "postgresql@16"
+// brew "postgresql@16" {
+//     fish "fish_add_path /opt/homebrew/opt/postgresql@16/bin"
+// }
 
 brew "pyenv" {
     fish "set -Ux PYENV_ROOT ~/.pyenv"
