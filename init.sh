@@ -49,7 +49,7 @@ echo "10. Install Rust toolchain from ${ul}https://www.rust-lang.org/tools/insta
 echo -e "   ${blue}${bold}curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh${norm}"
 echo
 
-echo "11. Add \`cargo\` dir to \$PATH."
+echo "11. Add \`cargo\` dir to \$PATH (if not yet done so—rustup in step 10 should've already set this up for you)."
 echo -e "   ${blue}${bold}fish_add_path \$HOME/.cargo/bin${norm}"
 echo
 

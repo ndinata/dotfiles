@@ -1,16 +1,11 @@
-tap "homebrew/cask-fonts"
-
 cask "font-jetbrains-mono"
 cask "visual-studio-code"
 cask "vlc"
-// cask "openemu"
-// cask "zulu11"
+// cask "zulu@17"
 
 brew "bat" {
     echo "--theme=\"TwoDark\"" "~/.config/bat/config"
 }
-
-brew "biome"
 
 brew "diff-so-fancy" {
     cp "diff-so-fancy/fdiff.fish" "~/.config/fish/functions/"
@@ -38,7 +33,7 @@ brew "neovim" {
     cp "neovim/init.vim" "~/.config/nvim/"
 }
 
-// brew "postgresql@15"
+// brew "postgresql@16"
 
 brew "pyenv" {
     fish "set -Ux PYENV_ROOT ~/.pyenv"
@@ -46,7 +41,7 @@ brew "pyenv" {
 }
 
 brew "rbenv" {
-    echo "status --is-interactive; and rbenv init - fish | source" "~/.config/fish/config.fish"
+    fish "rbenv init"
 }
 
 brew "ripgrep" {
