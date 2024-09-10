@@ -1,0 +1,92 @@
+{
+  "breadcrumbs.enabled": true,
+  "editor.fontFamily": "'JetBrains Mono', Inconsolata, FiraCode-Retina, 'SF Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.fontWeight": "400",
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.lineHeight": 23,
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.overviewRulerBorder": false,
+  "editor.renderLineHighlight": "all",
+  "editor.rulers": [80],
+  "editor.semanticHighlighting.enabled": "configuredByTheme",
+  "editor.suggestSelection": "first",
+  "editor.suggest.preview": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.wordWrap": "on",
+  "emmet.showExpandedAbbreviation": "never",
+  "explorer.confirmDragAndDrop": false,
+  "extensions.ignoreRecommendations": false,
+  "files.associations": {
+    "justfile": "shellscript"
+  },
+  "files.insertFinalNewline": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "terminal.integrated.fontSize": 13,
+  "window.autoDetectColorScheme": true,
+  "workbench.activityBar.location": "top",
+  "workbench.editor.showIcons": true,
+  "workbench.editor.tabActionLocation": "left",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.preferredDarkColorTheme": "Default Dark Modern",
+  "workbench.preferredLightColorTheme": "Default Light Modern",
+
+  "colorize.enable_search_variables": false,
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ],
+  "notebook.lineNumbers": "on",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.languageServer": "Pylance",
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "style"],
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)",
+    ["tw.style\\(([^)]*)\\)", "'([^']*)'"]
+  ],
+
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
